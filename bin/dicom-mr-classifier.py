@@ -325,12 +325,14 @@ def dicom_classify(zip_file_path, outbase, timezone):
     if acquisition_timestamp:
         metadata['acquisition']['timestamp'] = acquisition_timestamp
 
+    # Acquisition metadata from dicom header
+    dicom_file['info'] = {}
+    if header:
+        dicom_file['info'] = header
+
     # Append the dicom_file to the files array
     metadata['files'] = []
     metadata['files'].append(dicom_file)
-
-    # Acquisition metadata from dicom header
-    metadata['acquisition']['metadata'] = get_dicom_header(dcm)
 
     # Write out the metadata to file (.metadata.json)
     metafile_outname = os.path.join(os.path.dirname(outbase),'.metadata.json')
