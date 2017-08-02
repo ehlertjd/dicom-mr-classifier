@@ -322,9 +322,9 @@ def dicom_classify(zip_file_path, outbase, timezone):
         metadata['acquisition']['label'] = dcm.get('SeriesDescription')
         # File Classification
         dicom_file['classification'] = classification_from_label.infer_classification(dcm.get('SeriesDescription'))
-    # If no pixel data present, make classification intent "Non-Image"
+    # If no pixel data present, make classification intent "non-image"
     if not hasattr(dcm, 'PixelData'):
-        nonimage_intent = {'intent': ['Non-Image']}
+        nonimage_intent = {'intent': ['non-image']}
         # If classification is a dict, update dict with intent
         if isinstance(dicom_file['classification'], dict):
             dicom_file['classification'].update(nonimage_intent)
